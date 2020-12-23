@@ -6,8 +6,8 @@ import java.util.List;
 
 
 public class Connect4Board {
-    public static final int NUM_ROWS = 6;
-    public static final int NUM_COLS = 7;
+    public static final int NUM_ROWS = 7;
+    public static final int NUM_COLS = 9;
     public static final int NUM_PLAYERS = 2;
 
     private static final char P0_CELL = '0';
