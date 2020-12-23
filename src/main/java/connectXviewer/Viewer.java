@@ -12,14 +12,14 @@ import connectXgame.Cell;
 
 public class Viewer {
 
-    private static final String SPRITE_BOARD_TILE = "board_tile_106_in_120.png";
-    private static final String SPRITE_CHIP = "chip_106_in_120.png";
-    private static final String SPRITE_DOWN_ARROW = "down_arrow_120.png";
+    private static final String SPRITE_BOARD_TILE = "board_tile_91_in_105.png";
+    private static final String SPRITE_CHIP = "chip_91_in_105.png";
+    private static final String SPRITE_DOWN_ARROW = "down_arrow_105.png";
 
     // the following constant integers are dimensions and details of the above chosen images
     // todo if the above images are changed, please update the constants below
-    private static final int SPRITE_DETAIL_TILE_HEIGHT = 120;
-    private static final int SPRITE_DETAIL_TILE_WIDTH = 120;  // tile is a repeating block of the board, it is a square with a circular hole for chip
+    private static final int SPRITE_DETAIL_TILE_HEIGHT = 105;
+    private static final int SPRITE_DETAIL_TILE_WIDTH = 105;  // tile is a repeating block of the board, it is a square with a circular hole for chip
     private static final int SPRITE_DETAIL_BOTTOM_Y_TO_REST_THE_BOARD = 1080 - 75;  // Note: board in y direction is rested on a chosen bottom point (like resting on floor)
     private static final int BOARD_BORDER_WIDTH = 10;  // a rectangular border of this width is drawn around the board
 
