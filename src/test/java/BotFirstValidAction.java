@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class AgentFirstValidAction {
+public class BotFirstValidAction {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int myPlayerIndex = in.nextInt(); // 0 or 1 (Player 0 plays first)

@@ -6,7 +6,7 @@ import java.util.*;
  * Connect at least 4 of your chips in any direction to win.
  **/
 
-class StubGeneratedBot {
+class BotStubGenerated {
 
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
