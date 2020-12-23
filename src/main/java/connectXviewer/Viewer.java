@@ -121,8 +121,9 @@ public class Viewer {
         graphicEntityModule.createRectangle()
                 .setX(getViewerXforChip(0) - SPRITE_DETAIL_TILE_WIDTH / 2 - BOARD_BORDER_WIDTH / 2)
                 .setY(getViewerYforChip(0) - SPRITE_DETAIL_TILE_HEIGHT / 2 - BOARD_BORDER_WIDTH / 2)
-                .setHeight(BOARD_HEIGHT - BOARD_BORDER_WIDTH)  // it is somehow 1 time bigger while enclosing
-                .setWidth(BOARD_LENGTH - BOARD_BORDER_WIDTH)  // same reason as above
+                .setHeight(BOARD_HEIGHT - BOARD_BORDER_WIDTH - 1)  // (-borderWidth) because it is somehow 1 time bigger than the border width while enclosing;
+                // and if -1 wasn't there, sometimes a black line appears between board and its border on the right side
+                .setWidth(BOARD_LENGTH - BOARD_BORDER_WIDTH - 1)  // same reasons as above
                 .setFillAlpha(0)
                 .setLineWidth(BOARD_BORDER_WIDTH)
                 .setLineColor(BOARD_COLOR);
