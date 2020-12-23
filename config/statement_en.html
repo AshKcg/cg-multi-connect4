@@ -20,20 +20,20 @@
     </h1>
     <div>
       <div class="statement-rules-content">
-        The game takes place in a 6x7 board (6 Rows, and 7 Columns).<br>
+        The game takes place in a 7x9 board (7 Rows, and 9 Columns).<br>
         Each player takes turns to drop chips into one of the columns.<br>
         Player0 plays first followed by Player1.<br>
         <br>
         The game works as follows:
         <ul>
           <li>A player gets full state of the board as input.</li>
-          <li>The player chooses a column to drop their chip in: (outputs a single integer in range [0,6])</li>
+          <li>The player chooses a column to drop their chip in (outputs a single integer in range [0,8])</li>
           <li>The chip falls in that column of the board and settles in the bottom most empty cell.</li>
         </ul>
         <strong>Note:</strong><br>
-        There are 7 columns, indices are [0,6].<br>
+        There are 9 columns, indices are [0,8].<br>
         0 => left most column.<br>
-        6 => right most column.
+        8 => right most column.
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@
       <div class="text">
         <ul style="padding-top:0;padding-bottom:0">
           <li>Your program does not provide a command in the allotted time or one of the commands is unrecognized.</li>
-          <li>It chooses a column which is already filled, or, not in range i.e. not in [0,6].</li>
+          <li>It chooses a column which is already filled, or, not in range i.e. not in [0,8].</li>
         </ul>
       </div>
     </div>
@@ -103,8 +103,8 @@
           Player-0 receives <const>0,2,4,...</const> and Player-1 receives <const>1,3,5,...</const>.</p><br>
 
         <p><span class="statement-lineno">
-          Next <const>6</const> lines: </span>A string <var>boardRow</var> representing one row of the board
-          containing 7 characters (one character per column) with <const>'.'</const> for empty cells, <const>'0'</const> for cells with Player-0's chips,
+          Next <const>7</const> lines: </span>A string <var>boardRow</var> representing one row of the board
+          containing 9 characters (one character per column) with <const>'.'</const> for empty cells, <const>'0'</const> for cells with Player-0's chips,
           and <const>'1'</const> for cells with Player-1's chips. The rows are given one by one from top to bottom.</p><br>
 
         <p><span class="statement-lineno">Next line: </span>integer <var>numValidActions</var>:
@@ -131,8 +131,8 @@
     <div class="blk">
       <div class="title">Constraints</div>
       <div class="text">
-        <const>0</const> <= <var>turnIndex</var> <= <const>41</const>. (There are total 42 cells: 6*7)<br>
-        <const>1</const> <= <var>numValidActions</var> <= <const>7</const>. (There are 7 cols)<br>
+        <const>0</const> <= <var>turnIndex</var> <= <const>63</const>. (There are total 63 cells: 7*9)<br>
+        <const>1</const> <= <var>numValidActions</var> <= <const>9</const>. (There are 9 cols)<br>
         Response time per turn ≤ <const>50</const> ms.<br>
         Response time for the first turn <= <const>1000</const> ms.
       </div>
