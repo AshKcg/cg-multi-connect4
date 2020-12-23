@@ -11,7 +11,7 @@ public class BotDeliberateActions {
         // game loop
         while (true) {
             int turnIndex = in.nextInt(); // starts from 0; As the game progresses, Player0 gets [0,2,4,...,40] and Player1 gets [1,3,5,...,41]
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 7; i++) {
                 String boardRow = in.next(); // one row of the board (has 7 characters)
             }
             int numValidActions = in.nextInt(); // number of unfilled columns in the board

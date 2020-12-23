@@ -32,7 +32,7 @@ public class BotRandomActionMutableTalker {
         while (true) {
             turnIndex = in.nextInt();
 
-            for (int i = 0; i < 6; i++) {
+            for (int i = 0; i < 7; i++) {
                 String boardRow = in.next(); // one row of the board (has 7 characters)
             }
 
