@@ -5,6 +5,7 @@ import com.codingame.gameengine.core.AbstractReferee;
 import com.codingame.gameengine.core.GameManager;
 import com.codingame.gameengine.core.MultiplayerGameManager;
 import com.codingame.gameengine.module.entities.GraphicEntityModule;
+import com.codingame.gameengine.module.endscreen.EndScreenModule;
 
 import com.google.inject.Inject;
 
@@ -20,6 +21,7 @@ public class Referee extends AbstractReferee {
     // @Inject private SoloGameManager<Player> gameManager;
     @Inject private MultiplayerGameManager<Player> gameManager;
     @Inject private GraphicEntityModule graphicEntityModule;
+    @Inject private EndScreenModule endScreenModule;
 
     private static final int SCORE_WIN = 10;
     private static final int SCORE_LOSS = 0;
@@ -165,5 +167,13 @@ public class Referee extends AbstractReferee {
 
         // call gameManager's endGame function
         gameManager.endGame();
+    }
+
+    @Override
+    public void onEnd() {
+        super.onEnd();
+        int[] scores = {gameManager.getPlayer(0).getScore(), gameManager.getPlayer(1).getScore()};
+        // String[] texts = {};
+        endScreenModule.setScores(scores);
     }
 }
