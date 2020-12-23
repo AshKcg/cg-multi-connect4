@@ -103,17 +103,17 @@ public class Viewer {
         graphicEntityModule.createSprite()
                 .setX(1920/2)
                 .setAnchorX(0.5)
-                .setY(Viewer.getBoardBottomY())
+                .setY(getBoardBottomY())
                 .setAnchorY(1)
                 .setZIndex(19)
-                .setImage(Viewer.SPRITE_BOARD)
+                .setImage(SPRITE_BOARD)
                 .setTint(0x75694F);
 
         // draw texts: column numbers
         for (int c = 0; c < Connect4Board.NUM_COLS; c++) {
             graphicEntityModule.createText(Integer.toString(c))
-                    .setX(Viewer.getViewerXforChip(c))
-                    .setY(Viewer.getViewerYforChip(-1))
+                    .setX(getViewerXforChip(c))
+                    .setY(getViewerYforChip(-1))
                     .setZIndex(20)
                     .setFontSize(40)
                     .setFillColor(0xffffff)
@@ -122,8 +122,8 @@ public class Viewer {
 
         // draw turn index (constant text: label "Turn index")
         graphicsTextTurnIndex = graphicEntityModule.createText("Turn index: --")
-                .setX(Viewer.getViewerXforChip(Connect4Board.NUM_COLS/2))
-                .setY(Viewer.getViewerYforChip(-2))
+                .setX(getViewerXforChip(Connect4Board.NUM_COLS/2))
+                .setY(getViewerYforChip(-2))
                 .setZIndex(20)
                 .setFontFamily("monospace, monospace")  // single "monospace" may not work in some browsers (see reason in below website)
                 // https://stackoverflow.com/questions/38781089/font-family-monospace-monospace
@@ -136,7 +136,7 @@ public class Viewer {
         viewerDownArrowForCurMove = graphicEntityModule.createSprite()
                 .setAnchorX(0.5)
                 .setAnchorY(0.5)
-                .setImage(Viewer.SPRITE_DOWN_ARROW)
+                .setImage(SPRITE_DOWN_ARROW)
                 .setX(-500)
                 .setY(-500);
     }
@@ -171,9 +171,9 @@ public class Viewer {
         // put player's chip
         Sprite chip = graphicEntityModule.createSprite()
                 .setImage(SPRITE_CHIP)
-                .setX(Viewer.getViewerXforChip(col))
+                .setX(getViewerXforChip(col))
                 .setAnchorX(0.5)
-                .setY(Viewer.getViewerYforChip(-1))
+                .setY(getViewerYforChip(-1))
                 .setAnchorY(0.5)
                 .setTint(playerColorToken);
 
@@ -189,7 +189,7 @@ public class Viewer {
         // animate chip movement
         for (int i = 2, curRow = 0; i < 10; i++, curRow++) {  // from 0.1 secs, go to row=0 to settling row for every 0.1 increment
             if (curRow > settlingRow) break;
-            chip.setY(Viewer.getViewerYforChip(curRow));
+            chip.setY(getViewerYforChip(curRow));
             curTimeInAnimationState = 0.025 * i;
             graphicEntityModule.commitEntityState(curTimeInAnimationState, chip);  // as first will be 0.2, it starts travelling from 0.1
         }
@@ -205,10 +205,10 @@ public class Viewer {
                     RecentChipConnectionsDetails.DIRECTIONS_FOR_CHECKING_CONNECTIONS[directionIndex][1],
                     chipConnectionsDetails.getNumConnectedCells(directionIndex, 1));
             Line line = graphicEntityModule.createLine()
-                    .setX(Viewer.getViewerXforChip(endPoint1.getCol()))
-                    .setY(Viewer.getViewerYforChip(endPoint1.getRow()))
-                    .setX2(Viewer.getViewerXforChip(endPoint2.getCol()))
-                    .setY2(Viewer.getViewerYforChip(endPoint2.getRow()))
+                    .setX(getViewerXforChip(endPoint1.getCol()))
+                    .setY(getViewerYforChip(endPoint1.getRow()))
+                    .setX2(getViewerXforChip(endPoint2.getCol()))
+                    .setY2(getViewerYforChip(endPoint2.getRow()))
                     .setLineColor(0xf9b700)
                     .setLineWidth(10)
                     .setZIndex(50);
@@ -218,8 +218,8 @@ public class Viewer {
 
     public void setGameResultString(String gameResultString, int gameResultStringColor) {
         Text text = graphicEntityModule.createText(gameResultString)
-                .setX(Viewer.getViewerXforChip(Connect4Board.NUM_COLS/2))
-                .setY((1080 + Viewer.getBoardBottomY())/2)
+                .setX(getViewerXforChip(Connect4Board.NUM_COLS/2))
+                .setY((1080 + getBoardBottomY())/2)
                 .setZIndex(20)
                 .setFontSize(40)
                 .setFillColor(gameResultStringColor)
