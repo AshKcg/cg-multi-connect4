@@ -13,7 +13,7 @@ my_id, opp_id = [int(i) for i in input().split()]
 # game loop
 while True:
     turn_index = int(input())  # starts from 0; As the game progresses, Player0 gets [0,2,4,...,40] and Player1 gets [1,3,5,...,41]
-    for i in range(6):
+    for i in range(7):
         board_row = input()  # one row of the board (from top to bottom)
     num_valid_actions = int(input())  # number of unfilled columns in the board
     available_actions = []
