@@ -12,17 +12,21 @@ import connectXgame.Cell;
 
 public class Viewer {
 
-    private static final String SPRITE_BOARD = "board_bulkyedges_105in120.png";
-    private static final String SPRITE_CHIP = "circle105in120.png";
-    private static final String SPRITE_DOWN_ARROW = "downarrow105in120.png";
+    private static final String SPRITE_BOARD_TILE = "board_tile_106_in_120.png";
+    private static final String SPRITE_CHIP = "chip_106_in_120.png";
+    private static final String SPRITE_DOWN_ARROW = "down_arrow_120.png";
+
     // the following constant integers are dimensions and details of the above chosen images
-    private static final int SPRITE_DETAIL_BOARD_WIDTH = 860;  // board image height
-    private static final int SPRITE_DETAIL_BOARD_HEIGHT = 735;  // and its width
-    private static final int SPRITE_DETAIL_BOARD_X_EDGE_BULKINESS_FROM_LEFT = 10;  // there is a bulkiness added in each direction (same bulkiness both sides)
-    private static final int SPRITE_DETAIL_BOARD_Y_EDGE_BULKINESS_FROM_TOP = 5;  // the bulkiness is smaller at top than at bottom (bottom bulkiness not used in calculations)
-    private static final int SPRITE_DETAIL_TILE_WIDTH = 120;  // tile is a repeating block of the board, it is a square with a circular hole for chip
+    // todo if the above images are changed, please update the constants below
     private static final int SPRITE_DETAIL_TILE_HEIGHT = 120;
+    private static final int SPRITE_DETAIL_TILE_WIDTH = 120;  // tile is a repeating block of the board, it is a square with a circular hole for chip
     private static final int SPRITE_DETAIL_BOTTOM_Y_TO_REST_THE_BOARD = 1080 - 75;  // Note: board in y direction is rested on a chosen bottom point (like resting on floor)
+    private static final int BOARD_BORDER_WIDTH = 10;  // a rectangular border of this width is drawn around the board
+
+    private static final int BOARD_COLOR = 0x75694F;
+
+    private static final int BOARD_LENGTH = SPRITE_DETAIL_TILE_WIDTH * Connect4Board.NUM_COLS + 2 * BOARD_BORDER_WIDTH;
+    private static final int BOARD_HEIGHT = SPRITE_DETAIL_TILE_HEIGHT * Connect4Board.NUM_ROWS + 2 * BOARD_BORDER_WIDTH;
 
     private GraphicEntityModule graphicEntityModule;  // GraphicEntityModule instance is injected into Referee which then sets this variable to the injected instance
     private Sprite viewerDownArrowForCurMove;
@@ -100,14 +104,19 @@ public class Viewer {
         }
 
         // draw board
-        graphicEntityModule.createSprite()
-                .setX(1920/2)
-                .setAnchorX(0.5)
-                .setY(getBoardBottomY())
-                .setAnchorY(1)
-                .setZIndex(19)
-                .setImage(SPRITE_BOARD)
-                .setTint(0x75694F);
+        for (int r = 0; r < Connect4Board.NUM_ROWS; r++) {
+            int y = getViewerYforChip(r);
+            for (int c = 0; c < Connect4Board.NUM_COLS; c++) {
+                int x = getViewerXforChip(c);
+                graphicEntityModule.createSprite()
+                        .setX(x)
+                        .setY(y)
+                        .setAnchor(0.5)
+                        .setZIndex(19)
+                        .setImage(SPRITE_BOARD_TILE)
+                        .setTint(BOARD_COLOR);
+            }
+        }
 
         // draw texts: column numbers
         for (int c = 0; c < Connect4Board.NUM_COLS; c++) {
@@ -228,17 +237,17 @@ public class Viewer {
     }
 
     private static int getViewerXforChip(int col) {
-        return (1920 - SPRITE_DETAIL_BOARD_WIDTH) / 2  // start of board in x direction
-                + SPRITE_DETAIL_BOARD_X_EDGE_BULKINESS_FROM_LEFT  // pass the edge bulkiness
+        return (1920 - BOARD_LENGTH) / 2  // start of board in x direction
+                + BOARD_BORDER_WIDTH  // pass the border
                 + SPRITE_DETAIL_TILE_WIDTH * col  // pass number of tiles given by col
                 + SPRITE_DETAIL_TILE_WIDTH / 2;  // centre of current col
     }
 
     private static int getViewerYforChip(int row) {
-        return (SPRITE_DETAIL_BOTTOM_Y_TO_REST_THE_BOARD - SPRITE_DETAIL_BOARD_HEIGHT)  // start of board in y direction.
-                + SPRITE_DETAIL_BOARD_Y_EDGE_BULKINESS_FROM_TOP
-                + SPRITE_DETAIL_TILE_HEIGHT * row
-                + SPRITE_DETAIL_TILE_HEIGHT / 2;
+        return (SPRITE_DETAIL_BOTTOM_Y_TO_REST_THE_BOARD - BOARD_HEIGHT)  // start of board in y direction.
+                + BOARD_BORDER_WIDTH  // pass the border
+                + SPRITE_DETAIL_TILE_HEIGHT * row  // pass number of tiles given by row
+                + SPRITE_DETAIL_TILE_HEIGHT / 2;  // centre of current row
     }
 
     private static int getBoardBottomY() {
