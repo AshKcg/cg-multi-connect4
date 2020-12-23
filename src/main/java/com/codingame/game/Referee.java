@@ -38,7 +38,7 @@ public class Referee extends AbstractReferee {
 
         // todo set max turn time (first and other turns) default = 50 ms
         gameManager.setFirstTurnMaxTime(1000);
-        gameManager.setTurnMaxTime(50);
+        gameManager.setTurnMaxTime(100);
 
         // call initializer of connect 4 board
         connect4Board.initializeBoard();
