@@ -1,0 +1,142 @@
+<div id="statement_back" class="statement_back" style="display:none"></div>
+<div class="statement-body">
+
+  <!-- GOAL -->
+  <div class="statement-section statement-goal">
+    <h1>
+      <span class="icon icon-goal">&nbsp;</span>
+      <span>The Goal</span>
+    </h1>
+    <div class="statement-goal-content">
+      The aim of this game is to connect at least 4 of your chips in any direction.
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div class="statement-section statement-rules">
+    <h1>
+      <span class="icon icon-rules">&nbsp;</span>
+      <span>Rules</span>
+    </h1>
+    <div>
+      <div class="statement-rules-content">
+        The game takes place in a 6x7 board (6 Rows, and 7 Columns).<br>
+        Each player takes turns to drop chips into one of the columns.<br>
+        Player0 plays first followed by Player1.<br>
+        <br>
+        The game works as follows:
+        <ul>
+          <li>A player gets full state of the board as input.</li>
+          <li>The player chooses a column to drop their chip in: (outputs a single integer in range [0,6])</li>
+          <li>The chip falls in that column of the board and settles in the bottom most empty cell.</li>
+        </ul>
+        <strong>Note:</strong><br>
+        There are 7 columns, indices are [0,6].<br>
+        0 => left most column.<br>
+        6 => right most column.
+      </div>
+    </div>
+  </div>
+
+  <div class="statement-victory-conditions">
+    <div class="icon victory"></div>
+    <div class="blk">
+      <div class="title">Victory Conditions</div>
+      <div class="text">
+        <ul style="padding-top:0;padding-bottom:0"><li>
+          At least 4 of your chips are connected in any one direction (horizontal, vertical, or diagonal).
+        </li></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="statement-lose-conditions">
+    <div class="icon lose"></div>
+    <div class="blk">
+      <div class="title">Defeat Conditions</div>
+      <div class="text">
+        <ul style="padding-top:0;padding-bottom:0">
+          <li>Your program does not provide a command in the allotted time or one of the commands is unrecognized.</li>
+          <li>It chooses a column which is already filled, or, not in range i.e. not in [0,6].</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <h3 style="font-size:14px;font-weight:700;padding-top:15px;color:#838891;padding-bottom:15px">🐞 Debugging tips</h3>
+  <ul>
+    <li>Append text after your output containing columnIndex and that text will appear below your player's name</li>
+    <li>Press the gear icon on the viewer to access extra display options</li>
+    <li>Use the keyboard to control the action: space to play/pause, arrows to step 1 frame at a time</li>
+  </ul>
+  <br>
+
+  <!-- PROTOCOL -->
+  <div class="statement-section statement-protocol">
+    <h1>
+      <span class="icon icon-protocol">&nbsp;</span>
+      <span>Game Input</span>
+    </h1>
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="text">The program must first read the initialization data from standard input.
+        Then, within an infinite loop, read the contextual data from the standard input and
+        provide to the standard output one line with the index of the chosen column.</div>
+    </div>
+
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Initialization Input</div>
+      <div class="text">
+        <p><span class="statement-lineno">One line: </span>2 integers <var>myId</var>, <var>oppId</var>.
+          One of them will be <const>0</const> and the other will be <const>1</const>.</p>
+      </div>
+    </div>
+
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Input for one game turn</div>
+      <div class="text">
+        <p><span class="statement-lineno">
+          First Line: </span>integer <var>turnIndex</var>. Index of the current turn. As the game progresses,
+          Player-0 receives <const>0,2,4,...</const> and Player-1 receives <const>1,3,5,...</const>.</p><br>
+
+        <p><span class="statement-lineno">
+          Next <const>6</const> lines: </span>A string <var>boardRow</var> representing one row of the board
+          containing 7 characters (one character per column) with <const>'.'</const> for empty cells, <const>'0'</const> for cells with Player-0's chips,
+          and <const>'1'</const> for cells with Player-1's chips. The rows are given one by one from top to bottom.</p><br>
+
+        <p><span class="statement-lineno">Next line: </span>integer <var>numValidActions</var>:
+          the number of valid actions available to your bot (equal to the number of unfilled columns in the board).</p><br>
+
+        <p><span class="statement-lineno">Next <var>numValidActions</var> lines: </span>1 integer
+          <var>action</var>: one valid action (index of an unfilled column).</p><br>
+
+        <p><span class="statement-lineno">Next line: </span>integer <var>oppPreviousAction</var>:
+          the column index chosen by the opponent in the previous turn (-1 for Player-0 at the beginning).</p>
+      </div>
+    </div>
+
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Output</div>
+      <div class="text">
+        <span class="statement-lineno">A single integer</span> the index of the column to drop the chip in
+        <br>
+      </div>
+    </div>
+
+    <!-- Protocol block -->
+    <div class="blk">
+      <div class="title">Constraints</div>
+      <div class="text">
+        <const>0</const> <= <var>turnIndex</var> <= <const>41</const>. (There are total 42 cells: 6*7)<br>
+        <const>1</const> <= <var>numValidActions</var> <= <const>7</const>. (There are 7 cols)<br>
+        Response time per turn ≤ <const>50</const> ms.<br>
+        Response time for the first turn <= <const>1000</const> ms.
+      </div>
+    </div>
+  </div>
+
+</div>
