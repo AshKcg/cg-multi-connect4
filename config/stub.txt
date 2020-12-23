@@ -1,7 +1,7 @@
 read myId:int oppId:int
 gameloop
 read turnIndex:int
-loop 6 read boardRow:word(7)
+loop 7 read boardRow:word(9)
 read numValidActions:int
 loop numValidActions read action:int
 read oppPreviousAction:int
