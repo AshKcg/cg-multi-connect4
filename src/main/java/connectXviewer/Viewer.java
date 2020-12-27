@@ -126,7 +126,8 @@ public class Viewer {
                 .setWidth(BOARD_LENGTH - BOARD_BORDER_WIDTH - 1)  // same reasons as above
                 .setFillAlpha(0)
                 .setLineWidth(BOARD_BORDER_WIDTH)
-                .setLineColor(BOARD_COLOR);
+                .setLineColor(BOARD_COLOR)
+                .setZIndex(19);
 
         // draw texts: column numbers
         for (int c = 0; c < Connect4Board.NUM_COLS; c++) {
