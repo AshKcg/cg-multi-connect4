@@ -58,7 +58,7 @@ public class Connect4Board {
 
         // increment turn index
         turnIndex += 1;
-        if (turnIndex >= NUM_ROWS * NUM_COLS) {
+        if (turnIndex >= NUM_ROWS * NUM_COLS && winner == EMPTY_CELL) {
             winner = GAME_DRAW;
         }
     }
