@@ -179,12 +179,9 @@ public class Viewer {
     }
 
     public void showPlayerViewerMessage(int curPlayerIndex, String playerMessage) {
-        int oppPlayerIndex = curPlayerIndex == 0 ? 1 : 0;
         // show player's viewer message, and other player's text must disappear
         graphicsTextPlayerViewerMessage[curPlayerIndex].setText(playerMessage);
         graphicEntityModule.commitEntityState(0, graphicsTextPlayerViewerMessage[curPlayerIndex]);
-        graphicsTextPlayerViewerMessage[oppPlayerIndex == 0 ? 1 : 0].setText("");
-        graphicEntityModule.commitEntityState(0, graphicsTextPlayerViewerMessage[oppPlayerIndex]);
     }
 
     public void putPlayerChipAndAnimateIt(int playerColorToken, int settlingRow, int col) {
