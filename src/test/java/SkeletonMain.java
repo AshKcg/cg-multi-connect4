@@ -17,8 +17,8 @@ public class SkeletonMain {
         MultiplayerGameRunner gameRunner = new MultiplayerGameRunner();
 
         // Adds as many player as you need to test your game
-        gameRunner.addAgent(BotRandomActionMutableTalker.class, "Alpha");
-        gameRunner.addAgent(BotDeliberateActions.class, "Bravo");
+        gameRunner.addAgent(BotFixedGameplay.class, "Alpha");
+        gameRunner.addAgent(BotFixedGameplay.class, "Bravo");
 
         // Another way to add a player
         // gameRunner.addAgent("python3 /home/user/player.py");

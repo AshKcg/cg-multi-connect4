@@ -35,7 +35,7 @@ public class Referee extends AbstractReferee {
     public void init() {
         // Initialize your game here.
 
-        gameManager.setMaxTurns(Connect4Board.NUM_ROWS * Connect4Board.NUM_COLS);  // num cells in the board
+        gameManager.setMaxTurns(Connect4Board.NUM_ROWS * Connect4Board.NUM_COLS + 1);  // num cells in the board, and 1 STEAL
 
         // todo set max turn time (first and other turns) default = 50 ms
         gameManager.setFirstTurnMaxTime(1000);

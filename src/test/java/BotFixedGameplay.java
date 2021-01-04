@@ -22,8 +22,9 @@ public class BotFixedGameplay {
     private static final int p0_out_of_bounds[] = {0, 0, 0, 0, 7, 0};
     private static final int p1_out_of_bounds[] = {0, 0, 0, 0, 0, 8};
     private static final int starting_replay[] = {0, 6, 1, 5, 2, 4, 3};
+    private static final int win_in_the_last_move_with_steal[] = {3, -2, 2, 1, 4, 0, 5, 7, 6, 0, 8, 2, 8, 4, 6, 5, 1, 1, 3, 2, 7, 6, 3, 3, 4, 4, 5, 5, 7, 7, 8, 8, 0, 7, 1, 1, 0, 3, 0, 3, 4, 4, 8, 8, 7, 0, 6, 5, 2, 6, 6, 2, 5, 2, 8, 6, 7, 5, 3, 4, 2, 0, 1, 1};
 
-    private static final int ACTIONS[] = starting_replay;
+    private static final int ACTIONS[] = win_in_the_last_move_with_steal;
 
 
     public static void main(String[] args) {
