@@ -6,7 +6,7 @@ public class BotDeliberateActions {
         int myId = in.nextInt(); // 0 or 1 (Player 0 plays first)
         int oppId = in.nextInt(); // if your index is 0, this will be 1, and vice versa
 
-        String myActions[] = {"0", "0", "", "1"};
+        String myActions[] = {"Steal", "0", "0", "0", "0", "2"};
 
         // game loop
         while (true) {

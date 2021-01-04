@@ -19,3 +19,5 @@ InvalidAction:
     Add a new type: Steal move is not applicable in this turn
 Referee:
     Handle the new type of InvalidAction created above
+Viewer:
+    Steal must be shown differently

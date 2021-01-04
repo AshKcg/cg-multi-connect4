@@ -261,4 +261,31 @@ public class Viewer {
     private static int getBoardBottomY() {
         return SPRITE_DETAIL_BOTTOM_Y_TO_REST_THE_BOARD;
     }
+
+    public void placeAndAnimateSteal(int playerColorToken, int stolenRow, int stolenCol) {
+        viewerDownArrowForCurMove
+                .setX(getViewerXforChip(stolenCol))
+                .setY(getViewerYforChip(-1))
+                .setTint(playerColorToken);
+        graphicEntityModule.commitEntityState(0, viewerDownArrowForCurMove);  // commit at 0, so that it snaps to the new position from previous position
+
+        // put player's chip
+        Sprite chip = graphicEntityModule.createSprite()
+                .setImage(SPRITE_CHIP)
+                .setX(getViewerXforChip(stolenCol))
+                .setAnchorX(0.5)
+                .setY(getViewerYforChip(stolenRow))
+                .setAnchorY(0.5)
+                .setTint(playerColorToken)
+                .setScale(0);
+
+        double fractions_of_sizes[] = {0, 0.5, 0.4, 0.4, 0.8, 0.7, 0.7, 1};
+
+        for (int i = 0; i < fractions_of_sizes.length; i++) {
+            double chip_size_fraction = fractions_of_sizes[i];
+            double commit_time = i * 0.1;
+            chip.setScale(chip_size_fraction);
+            graphicEntityModule.commitEntityState(commit_time, chip);
+        }
+    }
 }

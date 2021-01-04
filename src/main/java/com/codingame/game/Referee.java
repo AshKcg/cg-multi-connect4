@@ -9,6 +9,7 @@ import com.codingame.gameengine.module.endscreen.EndScreenModule;
 
 import com.google.inject.Inject;
 
+import connectXgame.Cell;
 import connectXgame.Connect4Board;
 import connectXgame.InvalidAction;
 import connectXgame.RecentChipConnectionsDetails;
@@ -78,8 +79,14 @@ public class Referee extends AbstractReferee {
             viewer.showPlayerViewerMessage(curPlayerIndex, action.player_given_viewer_message);
 
             // put player's chip and animate it
-            int settlingRow = connect4Board.getRecentChipConnectionsDetails().getRecentCell().getRow();  // the bottom row in the chosen column in which the chip fell and settled
-            viewer.putPlayerChipAndAnimateIt(player.getColorToken(), settlingRow, action.col);
+            if (action.col == Connect4Board.STEAL_ACTION) {  // as this point is reached, the steal action is valid
+                Cell stolenCell = connect4Board.getRecentChipConnectionsDetails().getRecentCell();
+                gameManager.addTooltip(player, player.getNicknameToken() + " used STEAL");
+                viewer.placeAndAnimateSteal(player.getColorToken(), stolenCell.getRow(), stolenCell.getCol());
+            } else {
+                int settlingRow = connect4Board.getRecentChipConnectionsDetails().getRecentCell().getRow();  // the bottom row in the chosen column in which the chip fell and settled
+                viewer.putPlayerChipAndAnimateIt(player.getColorToken(), settlingRow, action.col);
+            }
 
             // if win, draw lines
             if (connect4Board.isGameOver()) {
