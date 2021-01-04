@@ -2,6 +2,7 @@ package com.codingame.game;
 import com.codingame.gameengine.core.AbstractMultiplayerPlayer;
 
 import connectXgame.InvalidAction;
+import connectXgame.Connect4Board;  // for STEAL action integer constant
 
 
 // Uncomment the line below and comment the line under it to create a Solo Game
@@ -20,21 +21,39 @@ public class Player extends AbstractMultiplayerPlayer {
     public Action getAction() throws TimeoutException, InvalidAction {
         String output = getOutputs().get(0);
 
-        String playerChosenColumnIndex = "";
-        try {
-            playerChosenColumnIndex = output.substring(0, 1);
-            int chosenAction = Integer.parseInt(playerChosenColumnIndex);
+        String playerAction = "";
+        String playerMessage = "";
 
-            String viewerMessage = output.substring(1).trim();
-            if (viewerMessage.length() > NUM_MAX_CHARS_IN_VIEWER_MESSAGE_PER_LINE) {
-                viewerMessage = insertPeriodically(viewerMessage, "\n", NUM_MAX_CHARS_IN_VIEWER_MESSAGE_PER_LINE);
+        int index_of_space_char = output.indexOf(' ');
+
+        if (index_of_space_char == -1) {
+            // there is no space char in the output, so, whole output is considered as action
+            playerAction = output;
+        } else {
+            // there is at least one space char in the output, so, substring up to that char is taken as action,
+            // and the rest is taken as viewer message
+            playerAction = output.substring(0, index_of_space_char);
+            playerMessage = output.substring(index_of_space_char).trim();
+        }
+
+        try {
+            int chosenAction;
+
+            if (playerAction.equalsIgnoreCase("STEAL")) {
+                chosenAction = Connect4Board.STEAL_ACTION;
+            } else {
+                chosenAction = Integer.parseInt(playerAction);
             }
 
-            return new Action(this, chosenAction, viewerMessage);
-        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
+            if (playerMessage.length() > NUM_MAX_CHARS_IN_VIEWER_MESSAGE_PER_LINE) {
+                playerMessage = insertPeriodically(playerMessage, "\n", NUM_MAX_CHARS_IN_VIEWER_MESSAGE_PER_LINE);
+            }
+
+            return new Action(this, chosenAction, playerMessage);
+        } catch (NumberFormatException e) {
             throw new InvalidAction(
                     "Wrong output!",
-                    playerChosenColumnIndex,
+                    playerAction,
                     InvalidAction.ACTION_NOT_INTEGER_OR_OUT_OF_BOUNDS);
         }
     }

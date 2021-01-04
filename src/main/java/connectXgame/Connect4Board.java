@@ -10,6 +10,8 @@ public class Connect4Board {
     public static final int NUM_COLS = 9;
     public static final int NUM_PLAYERS = 2;
 
+    public static final int STEAL_ACTION = -2;
+
     private static final char P0_CELL = '0';
     private static final char P1_CELL = '1';
     private static final char EMPTY_CELL = '.';
