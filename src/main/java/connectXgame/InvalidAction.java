@@ -5,6 +5,7 @@ public class InvalidAction extends Exception {
 
     public static final int ACTION_NOT_INTEGER_OR_OUT_OF_BOUNDS = 1;
     public static final int ACTION_FILLED_COLUMN = 2;
+    public static final int ACTION_STEAL_NOT_ALLOWED_IN_THIS_TURN = 3;
 
     private String playerAction;
     private int actionType;  // will be one of the above constants  // tells, why the action is invalid

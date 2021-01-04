@@ -20,6 +20,7 @@ public class Connect4Board {
     private char board[][] = new char[NUM_ROWS][NUM_COLS];
     private int turnIndex = 0;
     private char winner = EMPTY_CELL;
+    private boolean steal_used = false;  // this is used to allow one extra turn
 
     private RecentChipConnectionsDetails recentChipConnectionsDetails = new RecentChipConnectionsDetails();
 
@@ -42,25 +43,42 @@ public class Connect4Board {
     }
 
     public void playAction(int col) throws InvalidAction {
-        // check if the chosen column is not in bounds
-        if (col < 0 || col >= NUM_COLS) throw new InvalidAction("Chosen column out of bounds", col, InvalidAction.ACTION_NOT_INTEGER_OR_OUT_OF_BOUNDS);
 
-        // check if the chosen column is already filled
-        int bottom_most_row_with_empty_cell_in_this_column = getBottomMostRowWithEmptyCellFor(col);
-        if (bottom_most_row_with_empty_cell_in_this_column < 0) throw new InvalidAction("Chosen column is already filled", col, InvalidAction.ACTION_FILLED_COLUMN);
+        Cell settlingCell;  // this is where the chip drops to, or, where the chip is stolen in second turn
 
-        // update grid
-        char cell_fill_value;
-        if (turnIndex % NUM_PLAYERS == 0) cell_fill_value = P0_CELL;
-        else cell_fill_value = P1_CELL;
-        board[bottom_most_row_with_empty_cell_in_this_column][col] = cell_fill_value;
+        if (col == STEAL_ACTION) {  // a steal action: allow steal only in second turn
+            if (turnIndex != 1) {  // not second turn, disallow steal
+                throw new InvalidAction("Steal action is invalid in this turn", "STEAL", InvalidAction.ACTION_STEAL_NOT_ALLOWED_IN_THIS_TURN);
+            } else {  // steal in second turn
+                steal_used = true;
+                settlingCell = recentChipConnectionsDetails.getRecentCell();
+                // update board
+                board[settlingCell.row][settlingCell.col] = P1_CELL;  // only the second player steals
+            }
+        } else {  // a drop action
+
+            // check if the chosen column is not in bounds
+            if (col < 0 || col >= NUM_COLS) throw new InvalidAction("Chosen column out of bounds", col, InvalidAction.ACTION_NOT_INTEGER_OR_OUT_OF_BOUNDS);
+
+            // check if the chosen column is already filled
+            int bottom_most_row_with_empty_cell_in_this_column = getBottomMostRowWithEmptyCellFor(col);
+            if (bottom_most_row_with_empty_cell_in_this_column < 0) throw new InvalidAction("Chosen column is already filled", col, InvalidAction.ACTION_FILLED_COLUMN);
+
+            // update grid
+            char cell_fill_value;
+            if (turnIndex % NUM_PLAYERS == 0) cell_fill_value = P0_CELL;
+            else cell_fill_value = P1_CELL;
+            board[bottom_most_row_with_empty_cell_in_this_column][col] = cell_fill_value;
+
+            settlingCell = new Cell(bottom_most_row_with_empty_cell_in_this_column, col);
+        }
 
         // check for winner
-        setWinnerIfRecentCellConnectedRequiredNumberOfCells(new Cell(bottom_most_row_with_empty_cell_in_this_column, col));
+        setWinnerIfRecentCellConnectedRequiredNumberOfCells(settlingCell);
 
         // increment turn index
         turnIndex += 1;
-        if (turnIndex >= NUM_ROWS * NUM_COLS && winner == EMPTY_CELL) {
+        if (turnIndex >= NUM_ROWS * NUM_COLS + (steal_used ? 1 : 0) && winner == EMPTY_CELL) {
             winner = GAME_DRAW;
         }
     }
