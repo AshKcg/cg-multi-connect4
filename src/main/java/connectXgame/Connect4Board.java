@@ -20,7 +20,7 @@ public class Connect4Board {
     private char board[][] = new char[NUM_ROWS][NUM_COLS];
     private int turnIndex = 0;
     private char winner = EMPTY_CELL;
-    private boolean steal_used = false;  // this is used to allow one extra turn
+    private boolean steal_used = false;  // this is used to allow one extra turn, and, sending input to first player in third turn
 
     private RecentChipConnectionsDetails recentChipConnectionsDetails = new RecentChipConnectionsDetails();
 
@@ -149,6 +149,9 @@ public class Connect4Board {
 
         // send num valid actions
         List<Integer> validActions = getValidActions();
+        if (turnIndex == 1) {  // second turn, add steal action
+            validActions.add(STEAL_ACTION);
+        }
         inputStringBuilder.append(validActions.size());
         // send those actions
         for (Integer validAction : validActions) {
@@ -158,7 +161,9 @@ public class Connect4Board {
         inputStringBuilder.append('\n');
 
         // send opponent's last action
-        if (turnIndex == 0) inputStringBuilder.append(-1);
+        if (turnIndex == 0) inputStringBuilder.append(-1);  // first player gets -1 initally
+        else if (turnIndex == 2 && steal_used) inputStringBuilder.append(STEAL_ACTION);  // first player gets
+            // a negative number in third turn, if, second player used steal in the second turn
         else inputStringBuilder.append(recentChipConnectionsDetails.getRecentCell().getCol());
         inputStringBuilder.append('\n');
 

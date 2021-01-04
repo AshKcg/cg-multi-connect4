@@ -12,9 +12,8 @@ Player: getAction needs to be updated
 Connect4Board:
     Implement the steal move
     Take care of the number of max turns
-    Minor change in Input:
+    Changes in Input:
         Second player must get additional available action for the first time, which is, the integer constant of STEAL
-        All other inputs do not change now that the action is converted to the required integer constant which will
-        automatically be sent to the first player
+        The first player must get the integer constant of STEAL if second player steals
 InvalidAction:
     Add a new type: Steal move is not applicable in this turn
