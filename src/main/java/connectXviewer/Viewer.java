@@ -279,11 +279,11 @@ public class Viewer {
                 .setTint(playerColorToken)
                 .setScale(0);
 
-        double fractions_of_sizes[] = {0, 0.5, 0.4, 0.4, 0.8, 0.7, 0.7, 1};
+        double fractions_of_sizes[] = {0, 1};
 
         for (int i = 0; i < fractions_of_sizes.length; i++) {
             double chip_size_fraction = fractions_of_sizes[i];
-            double commit_time = i * 0.1;
+            double commit_time = i * 0.4;
             chip.setScale(chip_size_fraction);
             graphicEntityModule.commitEntityState(commit_time, chip);
         }
