@@ -34,6 +34,16 @@
         There are 9 columns, indices are [0,8].<br>
         0 => left most column.<br>
         8 => right most column.
+        <br><br>
+        <strong>The STEAL move: (optional)</strong><br>
+        <ul>
+          <li>Player1 can play a special move for their first action, because Player0 has an inherent advantage by playing first.</li>
+          <li>The move is STEAL. This move by Player1 replaces the Player0's only chip on the board with Player1's chip.</li>
+          <li>Player1 for their first action (i.e. in the second turn of the game) can output either the word "STEAL" or the integer "-2" for this.</li>
+          <li>This move is also given in the input to the player, as integer "-2" in available moves.</li>
+          <li>This move is available only to the second player and only in the second turn.</li>
+          <li>This move is optional.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -66,7 +76,7 @@
   <br>
   <h3 style="font-size:14px;font-weight:700;padding-top:15px;color:#838891;padding-bottom:15px">🐞 Debugging tips</h3>
   <ul>
-    <li>Append text after your output containing columnIndex and that text will appear below your player's name</li>
+    <li>Append text with a preceding space after your output containing columnIndex and that text will appear below your player's name</li>
     <li>Press the gear icon on the viewer to access extra display options</li>
     <li>Use the keyboard to control the action: space to play/pause, arrows to step 1 frame at a time</li>
   </ul>
@@ -108,13 +118,13 @@
           and <const>'1'</const> for cells with Player-1's chips. The rows are given one by one from top to bottom.</p><br>
 
         <p><span class="statement-lineno">Next line: </span>integer <var>numValidActions</var>:
-          the number of valid actions available to your bot (equal to the number of unfilled columns in the board).</p><br>
+          the number of valid actions available to your bot (equal to the number of unfilled columns in the board, plus one for "STEAL" if it is second turn of the game).</p><br>
 
         <p><span class="statement-lineno">Next <var>numValidActions</var> lines: </span>1 integer
-          <var>action</var>: one valid action (index of an unfilled column).</p><br>
+          <var>action</var>: one valid action (index of an unfilled column, or, -2 for STEAL in the second turn of the game).</p><br>
 
         <p><span class="statement-lineno">Next line: </span>integer <var>oppPreviousAction</var>:
-          the column index chosen by the opponent in the previous turn (-1 for Player-0 at the beginning).</p>
+          the column index chosen by the opponent in the previous turn (-1 for Player-0 at the beginning. If Player-1 used STEAL in the second turn, this will be -2 for Player-0 in the next turn).</p>
       </div>
     </div>
 
@@ -122,7 +132,7 @@
     <div class="blk">
       <div class="title">Output</div>
       <div class="text">
-        <span class="statement-lineno">A single integer</span> the index of the column to drop the chip in
+        <span class="statement-lineno">A single integer</span> the index of the column to drop the chip in. (Optional: If it is the second turn (turnIndex = 1), then the second player can output STEAL or -2)
         <br>
       </div>
     </div>
@@ -131,8 +141,8 @@
     <div class="blk">
       <div class="title">Constraints</div>
       <div class="text">
-        <const>0</const> <= <var>turnIndex</var> <= <const>63</const>. (There are total 63 cells: 7*9)<br>
-        <const>1</const> <= <var>numValidActions</var> <= <const>9</const>. (There are 9 cols)<br>
+        <const>0</const> <= <var>turnIndex</var> <= <const>64</const>. (63 cells(7*9), and one STEAL turn if used)<br>
+        <const>1</const> <= <var>numValidActions</var> <= <const>10</const>. (9 cols, and one STEAL in second turn for second player)<br>
         Response time per turn ≤ <const>100</const> ms.<br>
         Response time for the first turn <= <const>1000</const> ms.
       </div>
