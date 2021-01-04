@@ -51,7 +51,7 @@ public class BotRandomActionMutableTalker {
 
 
             // Output a column index to drop the chip in. Append message to show in the viewer.
-            System.out.println(validActions.get(random.nextInt(validActions.size())) + (sendMessage ? messagaes[turnIndex % messagaes.length] : ""));
+            System.out.println(validActions.get(random.nextInt(validActions.size())) + (sendMessage ? " " + messagaes[turnIndex % messagaes.length] : ""));
         }
     }
 }
