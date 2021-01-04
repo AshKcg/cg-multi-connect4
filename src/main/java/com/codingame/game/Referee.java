@@ -125,8 +125,10 @@ public class Referee extends AbstractReferee {
 
             if (invalidAction.getActionType() == InvalidAction.ACTION_NOT_INTEGER_OR_OUT_OF_BOUNDS) {
                 gameResultString = String.format("Player-%d (%s) wrong action \"%s\" (Require integer in range [0, %d])", curPlayerIndex, player.getNicknameToken(), invalidAction.getPlayerAction(), Connect4Board.NUM_COLS - 1);
-            } else {  // filled column
+            } else if (invalidAction.getActionType() == InvalidAction.ACTION_FILLED_COLUMN){  // filled column
                 gameResultString = String.format("Player-%d (%s) wrong action \"%s\" (Already filled column)", curPlayerIndex, player.getNicknameToken(), invalidAction.getPlayerAction());
+            } else {  // action type is InvalidAction.ACTION_STEAL_NOT_ALLOWED_IN_THIS_TURN
+                gameResultString = String.format("Player-%d (%s) wrong action (Steal action is invalid in this turn)", curPlayerIndex, player.getNicknameToken());
             }
 
             gameManager.addToGameSummary(GameManager.formatErrorMessage(String.format("Player %d (%s): Invalid action - %s", curPlayerIndex, player.getNicknameToken(), invalidAction.getMessage())));
