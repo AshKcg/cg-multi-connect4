@@ -1,0 +1,20 @@
+config:
+statement:
+    Steal move (Explanation; Usage: STEAL word, or an integer constant that comes in available actions)
+    Player viewer message must now be appended after using a space
+    Also, the number of maximum turns (now it is num_cells + 1)
+
+src:
+Player: getAction needs to be updated
+    As Steal is a word, player must separate viewer message with a space
+    The Steal move will have to be converted to an integer so that Action and Referee need not be changed
+        (for now constant is -2)  // can also have -1 (so use a constant variable)
+Connect4Board:
+    Implement the steal move
+    Take care of the number of max turns
+    Minor change in Input:
+        Second player must get additional available action for the first time, which is, the integer constant of STEAL
+        All other inputs do not change now that the action is converted to the required integer constant which will
+        automatically be sent to the first player
+InvalidAction:
+    Add a new type: Steal move is not applicable in this turn
