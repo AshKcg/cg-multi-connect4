@@ -35,15 +35,30 @@
         0 => left most column.<br>
         8 => right most column.
         <br><br>
-        <strong>The STEAL move: (optional)</strong><br>
-        <ul>
-          <li>Player1 can play a special move for their first action, because Player0 has an inherent advantage by playing first.</li>
-          <li>The move is STEAL. This move by Player1 replaces the Player0's only chip on the board with Player1's chip.</li>
-          <li>Player1 for their first action (i.e. in the second turn of the game) can output either the word "STEAL" or the integer "-2" for this.</li>
-          <li>This move is also given in the input to the player, as integer "-2" in available moves.</li>
-          <li>This move is available only to the second player and only in the second turn.</li>
-          <li>This move is optional.</li>
-        </ul>
+        <strong>The STEAL move for the second player: (optional)</strong><br>
+        The second player can play "STEAL" for their first action.<br>
+        This action does not place a new chip on the board but will convert the opponent's one and only existing chip into the second player's own chip.<br>
+        This action is only available to the second player, and only for their first action.<br>
+        An example is illustrated below<br>
+        <table style="border-collapse: collapse; width: 100%">
+          <tr>
+            <td style="border: 1px solid #dddddd; text-align: center;">
+              <img alt="Img: First player's action">
+            </td>
+            <td style="border: 1px solid #dddddd; text-align: center;">
+              <img alt="Img: Second player's action">
+            </td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #dddddd; text-align: center;">
+              First player placed a chip in<br>the middle column.
+            </td>
+            <td style="border: 1px solid #dddddd; text-align: center;">
+              Second Player used "STEAL"<br>and converted the existing chip.
+            </td>
+          </tr>
+        </table>
+        The second player can output either the word "STEAL" or the integer -2 for this action.
       </div>
     </div>
   </div>
@@ -100,7 +115,7 @@
       <div class="title">Initialization Input</div>
       <div class="text">
         <p><span class="statement-lineno">One line: </span>2 integers <var>myId</var>, <var>oppId</var>.
-          One of them will be <const>0</const> and the other will be <const>1</const>.</p>
+          One of them will be <const>0</const> and the other will be <const>1</const>. <var>myId</var> is 0 => first player. <var>myId</var> is 1 => second player.</p>
       </div>
     </div>
 
@@ -124,7 +139,7 @@
           <var>action</var>: one valid action (index of an unfilled column, or, -2 for STEAL in the second turn of the game).</p><br>
 
         <p><span class="statement-lineno">Next line: </span>integer <var>oppPreviousAction</var>:
-          the column index chosen by the opponent in the previous turn (-1 for Player-0 at the beginning. If Player-1 used STEAL in the second turn, this will be -2 for Player-0 in the next turn).</p>
+          the column index chosen by the opponent in the previous turn (first player gets -1 at the beginning, and -2 if the opponent used STEAL).</p>
       </div>
     </div>
 
@@ -132,7 +147,7 @@
     <div class="blk">
       <div class="title">Output</div>
       <div class="text">
-        <span class="statement-lineno">A single integer</span> the index of the column to drop the chip in. (Optional: If it is the second turn (turnIndex = 1), then the second player can output STEAL or -2)
+        <span class="statement-lineno">A single integer</span> the index of the column to drop the chip in. (Optional: If it is the second turn (turnIndex == 1), then the second player can output STEAL or -2)
         <br>
       </div>
     </div>
