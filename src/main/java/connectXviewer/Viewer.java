@@ -287,5 +287,16 @@ public class Viewer {
             chip.setScale(chip_size_fraction);
             graphicEntityModule.commitEntityState(commit_time, chip);
         }
+
+        // the following fixes the bug of incomplete overlying chip when pressing next move button in viewer
+        // what it does is, it puts a new overlying chip at the end of Steal turn
+        Sprite overlyingChip = graphicEntityModule.createSprite()
+                .setImage(SPRITE_CHIP)
+                .setX(getViewerXforChip(stolenCol))
+                .setAnchorX(0.5)
+                .setY(getViewerYforChip(stolenRow))
+                .setAnchorY(0.5)
+                .setTint(playerColorToken);
+        graphicEntityModule.commitEntityState(1, overlyingChip);
     }
 }
