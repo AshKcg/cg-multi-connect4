@@ -55,7 +55,7 @@ public class Viewer {
 
         for (int playerIndex = 0; playerIndex < 2; playerIndex++) {
 
-            int x = playerIndex == 0 ? 280 : 1920 - 280;
+            int x = playerIndex == 0 ? 250 : 1920 - 250;
             int y = 220;
 
             graphicEntityModule
