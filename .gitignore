@@ -1,3 +1,5 @@
 .idea/
 connect4.iml
 target/
+
+config/Boss.cpp
