@@ -69,7 +69,11 @@ public class Referee extends AbstractReferee {
 
         try {
             final Action action = player.getAction();
-            gameManager.addToGameSummary(String.format("%s player (%s) chose columnIndex %d", curPlayerIndex == 0 ? "First" : "Second", action.player.getNicknameToken(), action.col));
+            if (action.col != -2) {
+                gameManager.addToGameSummary(String.format("%s player (%s) chose columnIndex %d", curPlayerIndex == 0 ? "First" : "Second", action.player.getNicknameToken(), action.col));
+            } else {
+                gameManager.addToGameSummary(String.format("%s player (%s) chose STEAL", curPlayerIndex == 0 ? "First" : "Second", action.player.getNicknameToken()));
+            }
 
             connect4Board.playAction(action.col);
 
