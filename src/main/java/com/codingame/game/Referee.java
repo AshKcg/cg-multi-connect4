@@ -69,7 +69,7 @@ public class Referee extends AbstractReferee {
 
         try {
             final Action action = player.getAction();
-            gameManager.addToGameSummary(String.format("Player %d(%s) chose columnIndex %d", curPlayerIndex, action.player.getNicknameToken(), action.col));
+            gameManager.addToGameSummary(String.format("%s player (%s) chose columnIndex %d", curPlayerIndex == 0 ? "First" : "Second", action.player.getNicknameToken(), action.col));
 
             connect4Board.playAction(action.col);
 
@@ -104,7 +104,7 @@ public class Referee extends AbstractReferee {
                     viewer.drawWinConnectionLines(chipConnectionsDetails);
 
                     endTheGame(
-                            String.format("Player-%d (%s) has won the game", curPlayerIndex, player.getNicknameToken()),
+                            String.format("%s player (%s) has won the game", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken()),
                             player.getColorToken(),
                             curPlayerIndex == 0,
                             curPlayerIndex == 1);
@@ -115,11 +115,11 @@ public class Referee extends AbstractReferee {
 
             viewer.hideTheDownArrowForCurMove();
 
-            gameManager.addToGameSummary(GameManager.formatErrorMessage(String.format("Player %d (%s): Timeout!", curPlayerIndex, player.getNicknameToken())));
+            gameManager.addToGameSummary(GameManager.formatErrorMessage(String.format("%s player (%s): Timeout!", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken())));
             player.deactivate(player.getNicknameToken() + " timeout!");
 
             endTheGame(
-                    String.format("Player-%d (%s) timeout", curPlayerIndex, player.getNicknameToken()),
+                    String.format("%s player (%s) timeout", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken()),
                     player.getColorToken(),
                     opponentIndex == 0,
                     opponentIndex == 1);  // opponent wins the game
@@ -131,14 +131,14 @@ public class Referee extends AbstractReferee {
             String gameResultString;
 
             if (invalidAction.getActionType() == InvalidAction.ACTION_NOT_INTEGER_OR_OUT_OF_BOUNDS) {
-                gameResultString = String.format("Player-%d (%s) wrong action \"%s\" (Require integer in range [0, %d])", curPlayerIndex, player.getNicknameToken(), invalidAction.getPlayerAction(), Connect4Board.NUM_COLS - 1);
+                gameResultString = String.format("%s player (%s) wrong action \"%s\" (Require integer in range [0, %d])", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken(), invalidAction.getPlayerAction(), Connect4Board.NUM_COLS - 1);
             } else if (invalidAction.getActionType() == InvalidAction.ACTION_FILLED_COLUMN){  // filled column
-                gameResultString = String.format("Player-%d (%s) wrong action \"%s\" (Already filled column)", curPlayerIndex, player.getNicknameToken(), invalidAction.getPlayerAction());
+                gameResultString = String.format("%s player (%s) wrong action \"%s\" (Already filled column)", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken(), invalidAction.getPlayerAction());
             } else {  // action type is InvalidAction.ACTION_STEAL_NOT_ALLOWED_IN_THIS_TURN
-                gameResultString = String.format("Player-%d (%s) wrong action (Steal action is invalid in this turn)", curPlayerIndex, player.getNicknameToken());
+                gameResultString = String.format("%s player (%s) wrong action (Steal action is invalid in this turn)", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken());
             }
 
-            gameManager.addToGameSummary(GameManager.formatErrorMessage(String.format("Player %d (%s): Invalid action - %s", curPlayerIndex, player.getNicknameToken(), invalidAction.getMessage())));
+            gameManager.addToGameSummary(GameManager.formatErrorMessage(String.format("%s player (%s): Invalid action - %s", curPlayerIndex == 0 ? "First" : "Second", player.getNicknameToken(), invalidAction.getMessage())));
             player.deactivate(invalidAction.getMessage());
 
             endTheGame(

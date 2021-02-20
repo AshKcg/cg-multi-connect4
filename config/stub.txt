@@ -10,11 +10,11 @@ write 0
 INPUT
 myId: 0 or 1 (Player 0 plays first)
 oppId: if your index is 0, this will be 1, and vice versa
-turnIndex: starts from 0; As the game progresses, Player0 gets [0,2,4,...] and Player1 gets [1,3,5,...]
+turnIndex: starts from 0; As the game progresses, first player gets [0,2,4,...] and second player gets [1,3,5,...]
 boardRow: one row of the board (from top to bottom)
 numValidActions: number of unfilled columns in the board
 action: a valid column index into which a chip can be dropped
-oppPreviousAction: opponent's previous chosen column index (will be -1 for Player 0 in the first turn)
+oppPreviousAction: opponent's previous chosen column index (will be -1 for first player in the first turn)
 
 OUTPUT
 Output a column index to drop the chip in. Append message to show in the viewer.
